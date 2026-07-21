@@ -1,15 +1,15 @@
 # Sentiment Classification of Tweets: Crowdsourced vs. Gold Annotations
 
-A three-class (positive / neutral / negative) tweet sentiment classifier built with TF-IDF features and logistic regression. The project compares a model trained on **crowdsourced labels** against one trained on **expert (gold) labels** to measure how annotation quality affects downstream performance.
+A three-class (positive / neutral / negative) tweet sentiment classifier built with TF-IDF features and logistic regression. The project compares a model trained on **crowdsourced labels** against one trained on **expert labels** to measure how annotation quality affects performance.
 
-Full write-up: [`Report_HW3_Applied_ML.pdf`](./Report_HW3_Applied_ML.pdf)
+Full write-up: [`Report_HW3_Applied_ML.pdf`](./Report.pdf)
 
 ## Overview
 
 - **Text representation:** TF-IDF (unigrams + bigrams, sublinear TF scaling, `min_df=2`, 50,000-feature vocabulary)
-- **Classifier:** Multinomial logistic regression (`C=1.0`, `lbfgs` solver)
-- **Baseline:** Majority-class (always predicts "neutral") — 47.0% test accuracy
-- **Best model:** Trained on gold labels — **73.1% test accuracy**
+- **Classifier:** Multinomial logistic regression 
+- **Baseline:** Majority-class (always predicts "neutral"): 47.0% test accuracy
+- **Best model:** Trained on gold labels: **73.1% test accuracy**
 
 | Model | 5-fold CV Acc | Test Accuracy |
 |---|---|---|
@@ -24,10 +24,10 @@ Inter-annotator agreement between the crowdsourced and gold labels was moderate 
 ```
 .
 ├── sentiment_classifier.py        # Full training/evaluation pipeline
-├── Report_HW3_Applied_ML.pdf      # Written report with full analysis
-├── HW3/
+├── Report.pdf                     # Written report with full analysis
+├── data/
 │   ├── crowdsourced_train.csv     # 10,676 tweets, crowdsourced labels
-│   ├── gold_train.csv             # Same 10,676 tweets, expert (gold) labels
+│   ├── gold_train.csv             # Same 10,676 tweets but with expert labels
 │   └── test.csv                   # 5,524 held-out tweets, gold labels
 └── images/
     ├── data_exploration.png
@@ -35,22 +35,21 @@ Inter-annotator agreement between the crowdsourced and gold labels was moderate 
     └── top_features.png
 ```
 
-The datasets (`gold_train.csv` and `crowdsourced_train.csv`) are included directly in the repo under `HW3/`, along with `test.csv`. `crowdsourced_train.csv` and `gold_train.csv` cover the *same* tweets but with different label sources, which is what enables the inter-annotator agreement analysis.
 
 ## Pipeline
 
-1. **Load data** — read the three tab-separated CSVs.
-2. **Clean crowdsourced labels** — lowercase, strip whitespace, and map ~37 raw label variants (typos like `postive`, `nuetral`, `negayive`) to the three canonical classes.
-3. **Inter-annotator agreement** — compare crowdsourced vs. gold labels on the same tweets using raw agreement and Cohen's kappa.
-4. **Visualize** — label distributions, agreement heatmap, and test set distribution.
-5. **Train models** — one pipeline trained on crowdsourced labels, one on gold labels, each evaluated with 5-fold CV and on the held-out test set.
-6. **Confusion matrices** — for both models on the test set.
-7. **Feature analysis** — top 10 TF-IDF-weighted terms per class (gold model).
-8. **Summary** — results saved to `HW3/results.pkl` for reuse.
-
+1. **Load data**: read the three tab-separated CSVs.
+2. **Clean crowdsourced labels**: lowercase, strip whitespace, and map 37 label variants (typos like `postive`, `nuetral`, `negayive`) to the three canonical classes.
+3. **Inter-annotator agreement**: compare crowdsourced vs. gold labels on the same tweets using raw agreement and Cohen's kappa.
+4. **Visualize**: label distributions, agreement heatmap, and test set distribution.
+5. **Train models**: one pipeline trained on crowdsourced labels, one on gold labels, each evaluated with 5-fold CV and on the held-out test set.
+6. **Confusion matrices**: for both models on the test set.
+7. **Feature analysis**:  top 10 TF-IDF-weighted terms per class.
+8. **Summary**
+9. 
 ## Results
 
-### Data Exploration & Annotator Agreement
+### Data Exploration 
 
 Label distributions across the crowdsourced, gold, and test sets, plus the crowdsourced-vs-gold agreement matrix (κ = 0.446).
 
@@ -75,9 +74,5 @@ pip install pandas numpy matplotlib seaborn scikit-learn
 python sentiment_classifier.py
 ```
 
-Expects `crowdsourced_train.csv`, `gold_train.csv`, and `test.csv` in an `HW3/` subdirectory (tab-separated, UTF-8). Outputs three PNG figures and a `results.pkl` file to `HW3/`.
+Expects `crowdsourced_train.csv`, `gold_train.csv`, and `test.csv` in an `data/` subdirectory (tab-separated, UTF-8). Outputs three PNG figures and a `results.pkl` file.
 
-## Authors
-
-- Sergi Cases Alonso — sergi.cases01@estudiant.upf.edu
-- Martí Pascual Barluenga — marti.pascual01@estudiant.upf.edu
