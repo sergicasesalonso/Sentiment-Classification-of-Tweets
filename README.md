@@ -4,10 +4,10 @@ A three-class (positive / neutral / negative) tweet sentiment classifier built w
 Full write-up: [`Report`](./Report.pdf)
 
 ## Overview
-**Text representation:** TF-IDF (unigrams + bigrams, sublinear TF scaling, `min_df=2`, 50,000-feature vocabulary)
-**Classifier:** Multinomial logistic regression 
-**Baseline:** Majority-class (always predicts "neutral"): 47.0% test accuracy
-**Best model:** Trained on gold labels: **73.1% test accuracy**
+-**Text representation:** TF-IDF (unigrams + bigrams, sublinear TF scaling, `min_df=2`, 50,000-feature vocabulary)
+-**Classifier:** Multinomial logistic regression 
+-**Baseline:** Majority-class (always predicts "neutral"): 47.0% test accuracy
+-**Best model:** Trained on gold labels: **73.1% test accuracy**
 
 | Model | 5-fold CV Acc | Test Accuracy |
 |---|---|---|
