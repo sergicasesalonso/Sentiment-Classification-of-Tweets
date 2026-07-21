@@ -1,11 +1,9 @@
 # Sentiment Classification of Tweets: Crowdsourced vs. Gold Annotations
-
 A three-class (positive / neutral / negative) tweet sentiment classifier built with TF-IDF features and logistic regression. The project compares a model trained on **crowdsourced labels** against one trained on **expert labels** to measure how annotation quality affects performance.
 
 Full write-up: [`Report_HW3_Applied_ML.pdf`](./Report.pdf)
 
 ## Overview
-
 - **Text representation:** TF-IDF (unigrams + bigrams, sublinear TF scaling, `min_df=2`, 50,000-feature vocabulary)
 - **Classifier:** Multinomial logistic regression 
 - **Baseline:** Majority-class (always predicts "neutral"): 47.0% test accuracy
@@ -20,7 +18,6 @@ Full write-up: [`Report_HW3_Applied_ML.pdf`](./Report.pdf)
 Inter-annotator agreement between the crowdsourced and gold labels was moderate (Cohen's κ = 0.446, raw agreement 65.5%), and this label noise is the main driver of the ~10-point accuracy gap between the two models.
 
 ## Repository Contents
-
 ```
 .
 ├── sentiment_classifier.py        # Full training/evaluation pipeline
@@ -37,7 +34,6 @@ Inter-annotator agreement between the crowdsourced and gold labels was moderate 
 
 
 ## Pipeline
-
 1. **Load data**: read the three tab-separated CSVs.
 2. **Clean crowdsourced labels**: lowercase, strip whitespace, and map 37 label variants (typos like `postive`, `nuetral`, `negayive`) to the three canonical classes.
 3. **Inter-annotator agreement**: compare crowdsourced vs. gold labels on the same tweets using raw agreement and Cohen's kappa.
@@ -46,29 +42,25 @@ Inter-annotator agreement between the crowdsourced and gold labels was moderate 
 6. **Confusion matrices**: for both models on the test set.
 7. **Feature analysis**:  top 10 TF-IDF-weighted terms per class.
 8. **Summary**
-9. 
+   
 ## Results
 
 ### Data Exploration 
-
 Label distributions across the crowdsourced, gold, and test sets, plus the crowdsourced-vs-gold agreement matrix (κ = 0.446).
 
 ![Data exploration](./images/data_exploration.png)
 
 ### Confusion Matrices
-
 Test-set confusion matrices for the crowdsourced-trained (left) and gold-trained (right) classifiers. The gold model shows notably better recall on the negative class.
 
 ![Confusion matrices](./images/confusion_matrices.png)
 
 ### Top Features per Class
-
 Top 10 TF-IDF-weighted terms per class from the gold-trained model.
 
 ![Top features](./images/top_features.png)
 
 ## Usage
-
 ```bash
 pip install pandas numpy matplotlib seaborn scikit-learn
 python sentiment_classifier.py
