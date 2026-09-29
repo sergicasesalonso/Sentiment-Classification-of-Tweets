@@ -16,7 +16,6 @@ Full write-up: [`Report`](./Report.pdf)
 | Logistic Regression (Gold) | 0.6393 ± 0.0063 | 0.7310 |
 
 Inter-annotator agreement between the crowdsourced and gold labels was moderate (Cohen's κ = 0.446, raw agreement 65.5%), and this label noise is the main driver of the ~10-point accuracy gap between the two models.
-
 ## Repository Contents
 ```
 .
